@@ -20,7 +20,7 @@ public class JepImpl {
     }
 
     public static void main(String[] args) throws IOException {
-        String home = "/home/sidereus/vcs/git/github_personal/pythonBinding/resources/simpleSumNoClass.py";
+        String home = "./resources/simpleSumNoClass.py";
         // Path path = Paths.get(home);
         // List<String> lines = Files.readAllLines(path);
         // StringBuilder strBuild = new StringBuilder();
@@ -32,7 +32,7 @@ public class JepImpl {
         //         else if (line.equals("b"))
                     jep.set("b", 6.6);
         //         else if (line.equals("pf"))
-                    jep.set("pf", "/home/sidereus/out.txt");
+                    jep.set("pf", "./out.txt");
         //         else if (line.equals("summ"))
                     //jep.set("summ", 0.0);
         //         else if (line.equals("prod"))
