@@ -1,13 +1,11 @@
-package jep;
+package testJEP;
 
-import jep.python.PyModule;
+import jep.Jep;
+import jep.JepConfig;
+import jep.JepException;
+import sun.misc.FloatingDecimal;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 
 /**
  * Created by sidereus on 5/28/17.
@@ -19,12 +17,14 @@ public class JepImpl {
         return (-1 != offset) ? line.substring(0, offset) : line;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, JepException {
         String home = "./resources/simpleSumNoClass.py";
+        JepConfig config = new JepConfig();
+        config.setIncludePath("/home/sidereus/vcs/git/github_personal/pythonBinding/lib");
         // Path path = Paths.get(home);
         // List<String> lines = Files.readAllLines(path);
         // StringBuilder strBuild = new StringBuilder();
-        try(Jep jep = new Jep(false)) {
+        try(Jep jep = new Jep(config)) {
         //     for (String line : lines) {
         //         line = cleanFromComments(line);
         //         if (line.equals("a"))
@@ -45,9 +45,12 @@ public class JepImpl {
             Object sum = jep.getValue("summ");
             System.out.println(((Double) sum).floatValue());
             Object prod = jep.getValue("prod");
-            System.out.println(((Double) prod).floatValue());
+            Float fprod = ((Double) prod).floatValue();
+            Double dprod = Double.valueOf(Float.valueOf(fprod).toString());
+            System.out.println(fprod);
+            System.out.println(dprod);
         } catch (JepException e) {
-            e.printStackTrace();
+            throw new JepException(e.getMessage(), e.getCause());
         }
     }
 }

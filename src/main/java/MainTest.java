@@ -29,10 +29,14 @@ public class MainTest {
 
         pyMod = PyModule.importModule("simpleSumNoClass");
         pl = pyMod.createProxy(JPYplugin.class);
-        pyMod.setAttribute("a", 4.5, Double.class);
-        pyMod.setAttribute("b", 7.3, Double.class);
+        pyMod.setAttribute("a", 3.3, Double.class);
+        pyMod.setAttribute("b", 6.6, Double.class);
         pyMod.setAttribute("pf", home + "output/test", String.class);
         pl.execute();
+        PyObject summ = pyMod.getAttribute("summ");
+        PyObject prod = pyMod.getAttribute("prod");
+        System.out.println(summ.getDoubleValue());
+        System.out.println(((Double)prod.getDoubleValue()).floatValue());
         PyLib.stopPython();
     }
 }
